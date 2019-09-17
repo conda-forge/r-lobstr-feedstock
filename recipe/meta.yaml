@@ -1,4 +1,4 @@
-{% set version = '1.1.0' %}
+{% set version = '1.1.1' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,11 +10,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/lobstr_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/lobstr/lobstr_{{ version }}.tar.gz
-  sha256: 6bde70bd48673acc7a158dfceadf80d4458432a9db1b8a4dedc536b0125424c6
+  sha256: b8c9ce00095bd4f304b4883ef71da24572022f0632a18c3e1ba317814e70716e
 
 build:
   merge_build_host: True  # [win]
-  number: 1
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -64,7 +64,7 @@ extra:
 
 # Package: lobstr
 # Title: Visualize R Data Structures with Trees
-# Version: 1.1.0
+# Version: 1.1.1
 # Authors@R: c( person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre")), person("RStudio", role = "cph") )
 # Description: A set of tools for inspecting and understanding R data structures inspired by str(). Includes ast() for visualizing abstract  syntax trees, ref() for showing shared references, cst() for showing  call stack trees, and obj_size() for computing object sizes.
 # License: GPL-3
@@ -78,8 +78,8 @@ extra:
 # LazyData: true
 # RoxygenNote: 6.1.1
 # NeedsCompilation: yes
-# Packaged: 2019-06-19 20:40:32 UTC; hadley
+# Packaged: 2019-07-02 17:00:44 UTC; hadley
 # Author: Hadley Wickham [aut, cre], RStudio [cph]
 # Maintainer: Hadley Wickham <hadley@rstudio.com>
 # Repository: CRAN
-# Date/Publication: 2019-06-19 22:00:23 UTC
+# Date/Publication: 2019-07-02 23:10:04 UTC
