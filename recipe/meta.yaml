@@ -1,4 +1,4 @@
-{% set version = '1.1.1' %}
+{% set version = "1.1.2" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,11 +10,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/lobstr_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/lobstr/lobstr_{{ version }}.tar.gz
-  sha256: b8c9ce00095bd4f304b4883ef71da24572022f0632a18c3e1ba317814e70716e
+  sha256: 9bc533ed7e8f816097a03acfbca33308c9940ba26d02674f4ba06311cf3a1718
 
 build:
-  merge_build_host: True  # [win]
-  number: 1
+  merge_build_host: true  # [win]
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -22,9 +22,10 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - r-rlang                    # [build_platform != target_platform]
+    - r-rlang >=1.0.0            # [build_platform != target_platform]
     - r-crayon                   # [build_platform != target_platform]
-    - r-rcpp                     # [build_platform != target_platform]
+    - r-cpp11                    # [build_platform != target_platform]
+    - r-prettyunits              # [build_platform != target_platform]
     - {{ compiler('c') }}              # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
     - {{ compiler('cxx') }}            # [not win]
@@ -36,16 +37,18 @@ requirements:
     - {{ posix }}zip               # [win]
   host:
     - r-base
-    - r-rcpp
+    - r-cpp11
     - r-crayon
-    - r-rlang >=0.3.0
+    - r-rlang >=1.0.0
+    - r-prettyunits
   run:
     - r-base
     - {{ native }}gcc-libs         # [win]
-    - r-rcpp
+    - r-cpp11
     - r-crayon
-    - r-rlang >=0.3.0
-
+    - r-rlang >=1.0.0
+    - r-prettyunits
+    
 test:
   commands:
     - $R -e "library('lobstr')"           # [not win]
@@ -54,12 +57,9 @@ test:
 about:
   home: https://github.com/r-lib/lobstr
   license: GPL-3.0-only
-  summary: A set of tools for inspecting and understanding R data structures inspired by str().
-    Includes ast() for visualizing abstract  syntax trees, ref() for showing shared
-    references, cst() for showing  call stack trees, and obj_size() for computing object
-    sizes.
+  summary: A set of tools for inspecting and understanding R data structures inspired by str(). Includes ast() for visualizing abstract  syntax trees, ref() for showing shared references, cst() for showing  call stack trees, and obj_size() for computing object sizes.
   license_family: GPL3
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
+  license_file: {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
 
 extra:
   recipe-maintainers:
