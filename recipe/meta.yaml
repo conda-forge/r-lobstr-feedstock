@@ -14,7 +14,7 @@ source:
 
 build:
   merge_build_host: true  # [win]
-  number: 1
+  number: 2
   rpaths:
     - lib/R/lib/
     - lib/
@@ -24,7 +24,7 @@ requirements:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
     - r-rlang >=1.0.0            # [build_platform != target_platform]
     - r-crayon                   # [build_platform != target_platform]
-    - r-cpp11                    # [build_platform != target_platform]
+    - r-cpp11 >=0.4.2            # [build_platform != target_platform]
     - r-prettyunits              # [build_platform != target_platform]
     - {{ compiler('c') }}              # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
@@ -37,14 +37,14 @@ requirements:
     - {{ posix }}zip               # [win]
   host:
     - r-base
-    - r-cpp11
+    - r-cpp11 >=0.4.2
     - r-crayon
     - r-rlang >=1.0.0
     - r-prettyunits
   run:
     - r-base
     - {{ native }}gcc-libs         # [win]
-    - r-cpp11
+    - r-cpp11 >=0.4.2
     - r-crayon
     - r-rlang >=1.0.0
     - r-prettyunits
@@ -56,10 +56,12 @@ test:
 
 about:
   home: https://github.com/r-lib/lobstr
-  license: GPL-3.0-only
+  license: MIT
   summary: A set of tools for inspecting and understanding R data structures inspired by str(). Includes ast() for visualizing abstract  syntax trees, ref() for showing shared references, cst() for showing  call stack trees, and obj_size() for computing object sizes.
-  license_family: GPL3
-  license_file: {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+  license_family: MIT
+  license_file: 
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/MIT
+    - LICENSE
 
 extra:
   recipe-maintainers:
