@@ -1,6 +1,5 @@
 {% set version = "1.1.2" %}
 {% set posix = 'm2-' if win else '' %}
-{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: r-lobstr
@@ -13,8 +12,7 @@ source:
   sha256: 9bc533ed7e8f816097a03acfbca33308c9940ba26d02674f4ba06311cf3a1718
 
 build:
-  merge_build_host: true  # [win]
-  number: 3
+  number: 4
   rpaths:
     - lib/R/lib/
     - lib/
@@ -27,7 +25,9 @@ requirements:
     - r-cpp11 >=0.4.2            # [build_platform != target_platform]
     - r-prettyunits              # [build_platform != target_platform]
     - {{ compiler('c') }}              # [not win]
+    - {{ stdlib("c") }}                # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
+    - {{ stdlib("m2w64_c") }}          # [win]
     - {{ compiler('cxx') }}            # [not win]
     - {{ compiler('m2w64_cxx') }}      # [win]
     - {{ posix }}filesystem        # [win]
@@ -43,7 +43,6 @@ requirements:
     - r-prettyunits
   run:
     - r-base
-    - {{ native }}gcc-libs         # [win]
     - r-cpp11 >=0.4.2
     - r-crayon
     - r-rlang >=1.0.0
