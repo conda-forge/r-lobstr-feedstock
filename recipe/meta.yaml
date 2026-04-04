@@ -1,4 +1,4 @@
-{% set version = "1.2.0" %}
+{% set version = "1.2.1" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,7 +9,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/lobstr_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/lobstr/lobstr_{{ version }}.tar.gz
-  sha256: 5cdadf420cb8877e442aff50beb191d13b69c51911d402a6c50b07666237de4b
+  sha256: fb7963bb61f165e999afc5afc754cb75f5f60d699271400ca6dda5e3600d81c0
 
 build:
   number: 0
